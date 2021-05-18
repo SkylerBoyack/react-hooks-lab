@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PokemonList from './components/PokemonList'
-import './App.css'
+import {Link} from 'react-router-dom'
 
-function App() {
+const PokemonList = () => {
   const [pokeList, setPokeList] = useState([])
   
   useEffect(() => {
@@ -14,13 +13,16 @@ function App() {
   }, [])
 
   return(
-    <div className='App'>
-      {pokeList.map((pokemon, index) => {
-          return <PokemonList name={pokemon.name} key={index}
-          />
+    <div className='PokemonList'>
+      {pokeList.map((pokemon) => {
+          return (
+        <Link key={pokemon.url} to={`/pokemon/${pokemon.name}`}>
+            <h2>{pokemon.name}</h2>
+        </Link> 
+        )
       })}
     </div>
   )
 }
 
-export default App 
+export default PokemonList
